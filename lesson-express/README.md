@@ -17,3 +17,12 @@ The view engines, that are much similar to templates in django, allow us with th
 ###Middlewares:
 
 It is essentially the code that runs between the process of receiving a request and sending a response. All the url routing, authentications and things like the 404 status come under this.
+
+###Static Files:
+
+In node we use express to load static files by using a middleware function.
+
+
+###MongoDB
+
+A NoSQL Database that works on the basis of schemas. Currently using MongoDB Atlas, a cloud based mongodb system. Accessing the database using a connection string and executing operations on it using the mongoose module.  
