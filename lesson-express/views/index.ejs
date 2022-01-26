@@ -11,7 +11,9 @@
             <h2>All Blogs</h2>
             <% blogs.forEach(blog => { %>
                 <h3>
-                    <%= blog.title %>
+                    <a href="/blogs/<%= blog.id %>">
+                        <%= blog.title %>
+                    </a>
                 </h3>
                 <p>
                     <%= blog.snippet %>

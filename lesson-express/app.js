@@ -17,6 +17,8 @@ mongoose.connect(dbURI)
     })
 ;
 
+const Blog = require('./models/blog');
+
 // View Engine set up
 app.set('view engine', 'ejs');
 
@@ -24,28 +26,60 @@ app.set('view engine', 'ejs');
 app.listen(3000);
 
 // Middleware stuff
-app.use(express.static('styles'))
+app.use(express.static("styles"))
+app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
 // Setting up app routes
 
 app.get('/', (req,res) => {
-    const blogs = [
-        {title: 'Blog1', snippet: 'You are not a good person akshat'},
-        {title: 'Blog2', snippet: 'You are not a good person akshat'},
-        {title: 'Blog3', snippet: 'You are not a good person akshat'}
-    ]
-    res.render('index', {title:titles[0], blogs})
+    res.redirect('/blogs')
 })
 
 app.get('/about',(req,res) => {
     res.render('about', {title:titles[1]})
 })
 
-// Path for create view
+// Blog Routes
+
+app.get('/blogs', (req, res) => {
+    Blog.find()
+        .then((results) => {
+            res.render('index',{title:titles[0], 'blogs': results});
+        })
+        .catch((err) => console.log(err));
+});
+
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body);
+    blog.save()
+        .then((result) => {
+            console.log(result);
+            res.redirect('/blogs')
+        })
+        .catch((err) => console.log(err));
+})
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id)
+        .then((results) => {
+            res.render('details',{title: results.title,'blog': results});
+        })
+        .catch((err) => console.log(err));
+})
+
+app.delete('/blogs/:id', (req,res) => {
+    const id = req.params.id;
+    Blog.findByIdAndDelete(id)
+        .then((result) => {
+            res.json({ redirect: '/blogs' })
+        })
+        .catch(err => console.log(err));
+})
 
 app.get('/blogs/create', (req,res) => {
-    res.render('create', {title:titles[2]})
+    res.render('create', {title:titles[2], 'blog': Blog})
 })
 
 // redirect setup for wrong path but similar to above
