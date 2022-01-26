@@ -5,6 +5,7 @@ const titles = ["Home Page", "About Page", "Create Page", "404 Not Found"]
 // Dependencies
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const Blog = require('./models/blog')
 
 // Connection to mongo DB
 const dbURI = "mongodb+srv://destrex271:akshat26@learningnode.lknsj.mongodb.net/nodetuts?retryWrites=true&w=majority";
@@ -16,6 +17,38 @@ mongoose.connect(dbURI)
         console.log(err)
     })
 ;
+
+// Mongoose and mongo setup routes
+app.get('/add-blog', (req,res)=>{
+    const blog = new Blog({
+        title: "Test Blog",
+        snippet: "Blog",
+        body: "Test blog"
+    });
+    blog.save()
+        .then((results) => {
+            res.send(results)
+        })
+        .catch((err) => console.log(err))
+})
+
+app.get('/all-blogs', (req, res)=>{
+    Blog.find()
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+})
+
+app.get('/get-blog', (req, res) => {
+    Blog.findById('61f1a16106ba340df40316bd')
+        .then((result) => {
+            res.send(result)
+        })
+        .catch((err)=>console.log(err))
+})
 
 // View Engine set up
 app.set('view engine', 'ejs');
