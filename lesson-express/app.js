@@ -9,6 +9,12 @@ app.listen(3000);
 
 // Setting up app routes
 
+app.use((req,res, next) => {
+    console.log("Middleware request!");
+    next();
+})
+
+
 app.get('/', (req,res) => {
     const blogs = [
         {title: 'Blog1', snippet: 'You are not a good person akshat'},
@@ -16,6 +22,11 @@ app.get('/', (req,res) => {
         {title: 'Blog3', snippet: 'You are not a good person akshat'}
     ]
     res.render('index', {title:titles[0], blogs})
+})
+
+app.use((req,res,next) => {
+    console.log("Middleware request 2");
+    next();
 })
 
 app.get('/about',(req,res) => {
@@ -35,7 +46,7 @@ app.get('/about-us',(req,res) => {
 
 
 
-// setting up 404 redirect
+// setting up 404 redirect -- middleware
 app.use((req, res) => {
     res.status(404).render('404',{title: titles[3]})
 })

@@ -16,4 +16,4 @@ The view engines, that are much similar to templates in django, allow us with th
 
 ###Middlewares:
 
-Coming Soon!
+It is essentially the code that runs between the process of receiving a request and sending a response. All the url routing, authentications and things like the 404 status come under this.
