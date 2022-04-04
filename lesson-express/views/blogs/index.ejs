@@ -1,10 +1,10 @@
 <html lang="en">
 
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body>
     <!--- = Escapes special characters, - does not escape an special characters --->
-    <%- include('./partials/nav.ejs') %>
+    <%- include('../partials/nav.ejs') %>
 
     <div class="blogs content">
         <% if (blogs.length > 0) { %>
@@ -25,6 +25,6 @@
             </h2>
         <% } %>
     </div>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

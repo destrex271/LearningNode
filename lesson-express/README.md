@@ -46,4 +46,13 @@ The requests have the following url structre as to be considered in the given de
 - For adding an item to the data set : localhost:3000/blogs/create
 - For retrieving a single item from the dataset using id as a param : localhost:3000/blogs/:id
 - For deleteing a single item from the dataset : localhost:3000/blogs/:id
-    
+
+### URL Routing with express
+
+The router module `const router = express.Router()` provides us with the capability to connect url route files to our main express application as a middleware function.
+
+### MVC - Model, View and Controller
+
+MVC is a basic structure defined which is usually followed while developing web applications using node.js
+
+The idea behind MVC is that in our application we have a Model for our database and some views, i.e html pages to be rendered with dynamic data from the models, and a controller is used to link these two thus providing a safe passage of data from the model to the view.
